@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MorphoVision - Landscape</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🔍 Morphological Image<span><span>   Processor</span></h1>
+        <p>Pengolahan Citra Digital - Operasi Morfologi</p>
+    </header>
+
+    <form method="POST" enctype="multipart/form-data" class="control-box">
+        <label for="file-upload" class="custom-file-upload">Pilih Gambar</label>
+        <input id="file-upload" type="file" name="image" onchange="this.form.submit()">
+
+        <select name="method" onchange="this.form.submit()">
+            <option value="dilasi" {% if method=='dilasi' %}selected{% endif %}>Dilasi</option>
+            <option value="erosi" {% if method=='erosi' %}selected{% endif %}>Erosi</option>
+            <option value="opening" {% if method=='opening' %}selected{% endif %}>Opening</option>
+            <option value="closing" {% if method=='closing' %}selected{% endif %}>Closing</option>
+        </select>
+
+        <a href="/reset" class="reset-btn">Reset Halaman</a>
+    </form>
+
+    {% if not original %}
+    <div class="info-section" style="margin-bottom: 30px;">
+        <div class="group-info">
+            <h3>Kelompok 1</h3>
+            <p>Selamat datang! Silakan unggah citra untuk memulai proses morfologi digital.</p>
+            <hr style="border: 0; border-top: 1px solid #d0e0f5; margin: 15px 0;">
+            <h4>Anggota Kelompok:</h4>
+            <ul>
+                <li><strong>Salsabillah Ramdhani</strong> 233510313</li>
+                <li><strong>Niswah Mas Uliyah</strong> 233510338</li>
+                <li><strong>Chindy Aurella Taniya</strong> 233510392</li>
+                <li><strong>Rahayu Adiela Razade</strong> 233510573</li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="main-content">
+        <div class="image-card">
+            <h3>Citra Awal</h3>
+            <div class="img-wrapper">
+                {% if original %}
+                    <img src="{{ original }}" class="preview-img">
+                {% else %}
+                    <div class="placeholder">Belum ada gambar</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="image-card">
+            <h3>Hasil Proses ({{ method | capitalize }})</h3>
+            <div class="img-wrapper">
+                {% if result %}
+                    <img src="{{ result }}" class="preview-img">
+                {% else %}
+                    <div class="placeholder">Hasil akan muncul di sini</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% if original %}
+    <div class="info-section" style="margin-top: 30px;">
+        <h3>Keterangan Metode: {{ method | capitalize }}</h3>
+        <p>
+            {% if method == 'dilasi' %}
+                
+                <strong>Dilasi:</strong> Dilasi merupakan operasi morfologi yang berfungsi untuk memperbesar area objek pada citra. Pada metode ini, piksel putih (objek) akan meluas ke area sekitarnya sesuai dengan ukuran kernel yang digunakan. Dilasi sering digunakan untuk menutup celah kecil pada objek, menghubungkan bagian objek yang terpisah, serta memperjelas bentuk objek utama pada citra. Gambar awal yang cocok untuk dilasi ada beberapa contoh seperti gambar objek putih tipis, tepi objek putih yang putus-putus, dan teks putih.
+           
+            {% elif method == 'erosi' %}
+                
+                <strong>Erosi:</strong> Erosi adalah operasi morfologi yang berfungsi untuk memperkecil area objek sehingga piksel putih berkurang. Erosi biasanya digunakan untuk menghilangkan noise kecil, memisahkan objek yang saling menempel, dan menipiskan objek. Gambar awal yang cocok untuk erosi ada beberapa contoh seperti noise kecil, objek putih yang terlalu tebal, dan teks putih tebal.
+                
+            {% elif method == 'opening' %}
+                <strong>Opening:</strong> Opening merupakan kombinasi dari operasi erosi yang diikuti dengan dilasi. Tujuan utama dari metode ini adalah menghilangkan noise kecil tanpa merusak bentuk objek utama. Opening sangat efektif digunakan untuk membersihkan citra dari gangguan kecil sambil mempertahankan struktur objek. Gambar awal yang cocok untuk erosi ada beberapa contoh seperti gambar yang banyak noise kecil, objek putih utama yang relatif besar dan jelas, dan background hitam.
+            
+            {% elif method == 'closing' %}
+
+                <strong>Closing:</strong> Closing merupakan kebalikan dari opening, yaitu dilasi yang diikuti dengan erosi. Closing membantu membuat objek tampak lebih utuh dan solid, terutama pada citra yang memiliki retakan kecil. Gambar awal yang cocok untuk closing ada beberapa contoh yaitu objek putih yang berlubang-lubang  kecil, tepi objek yang retak atau bolong dan gambar hitam putih dengan celah putih kecil.
+            {% endif %}
+        </p>
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

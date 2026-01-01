@@ -1,0 +1,182 @@
+/* Definisi Variabel Warna - Lebih Fresh */
+:root {
+    --primary: #4a90e2;
+    --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    --primary-dark: #357abd;
+    --danger: #ff5e5e;
+    --bg: #8f868659;
+    --card: #ffffff;
+    --text: #2d3436;
+    --text-light: #636e72;
+    --accent: #f0f7ff;
+}
+
+body {
+    background: var(--bg);
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+header h1 span { 
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- PERBAIKAN TOMBOL UNGGAH GANDA --- */
+input[type="file"] { 
+    display: none !important; 
+}
+
+.control-box {
+    background: var(--card);
+    padding: 25px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+}
+
+.custom-file-upload {
+    background: var(--accent);
+    border: 2px dashed var(--primary);
+    padding: 12px 25px;
+    border-radius: 12px;
+    cursor: pointer;
+    color: var(--primary);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.custom-file-upload:hover { 
+    background: var(--primary-gradient); 
+    color: white;
+    transform: translateY(-3px);
+}
+
+select {
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 2px solid #e0e6ed;
+    min-width: 180px;
+}
+
+/* Tombol Reset - Gaya Dasar */
+.reset-btn {
+    padding: 12px 30px;
+    background: #ff7675; /* Warna dasar merah muda lembut */
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    display: inline-block;
+    
+    /* KUNCI: Transisi halus agar gerakan tidak kaku */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 10px rgba(255, 118, 117, 0.2);
+}
+
+/* EFEK SAAT KURSOR DEKAT (HOVER) */
+.reset-btn:hover {
+    background: #d63031; /* Berubah menjadi merah lebih tegas */
+    transform: translateY(-5px) scale(1.05); /* Terangkat ke atas dan sedikit membesar */
+    box-shadow: 0 10px 20px rgba(214, 48, 49, 0.4); /* Bayangan lebih dalam agar terlihat melayang */
+    color: #fff;
+}
+
+/* EFEK SAAT KLIK (ACTIVE) */
+.reset-btn:active {
+    transform: translateY(-2px) scale(0.98); /* Terlihat membal saat diklik */
+}
+
+/* --- KUNCI LAYOUT LANDSCAPE --- */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr !important; /* Paksa 2 kolom */
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.image-card {
+    background: var(--card);
+    padding: 25px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    transition: all 0.4s ease;
+}
+
+.image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.img-wrapper {
+    height: 400px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fdfdfd;
+    border-radius: 16px;
+    border: 2px solid #f1f3f5;
+    overflow: hidden;
+}
+
+.preview-img {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+}
+
+/* Info Section */
+.info-section {
+    background: white; 
+    padding: 30px;
+    border-radius: 20px;
+    border-left: 8px solid var(--primary);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+}
+
+.group-info ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.group-info li {
+    background: var(--accent);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid var(--primary);
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Abaikan responsivitas portrait agar tetap landscape di tablet */
+@media (max-width: 600px) {
+    .main-content { grid-template-columns: 1fr !important; }
+}
